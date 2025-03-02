@@ -26,21 +26,15 @@ function CovidDashboard() {
     }
     fetchData();
   }, []);
-  const maxDate = useMemo(
-    () =>
-      covidData.toSorted(
-        (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
-      )[0]?.date + '',
-    [covidData]
-  );
-  const minDate = useMemo(
-    () =>
-      covidData.toSorted(
-        (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
-      )[0]?.date + '',
-
-    [covidData]
-  );
+  const { maxDate, minDate } = useMemo(() => {
+    const orderedData = covidData.toSorted(
+      (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+    );
+    return {
+      maxDate: orderedData[0]?.date + '',
+      minDate: orderedData.pop()?.date + '',
+    };
+  }, [covidData]);
 
   const filteredData = useMemo(
     () =>
@@ -77,7 +71,7 @@ function CovidDashboard() {
           title="End Date"
         />
       </div>
-      <section className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <section className="3xl:grid-cols-2 grid grid-cols-1 gap-4">
         <div className="mt-4 max-w-[100%] rounded-lg bg-white p-6 shadow-lg">
           <ChartComponent
             data={filteredData}
@@ -99,7 +93,7 @@ function CovidDashboard() {
             data={filteredData}
             labels={filteredData.map((entry) => entry.date + '')}
             title="COVID-19 Cases and Recovered Over Time"
-            type="hospitalized-deaths"
+            type="hospitalized-states"
           />
         </div>
         <div className="mt-4 max-w-[100%] rounded-lg bg-white p-6 shadow-lg">

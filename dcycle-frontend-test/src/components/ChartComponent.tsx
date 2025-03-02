@@ -88,7 +88,7 @@ export const ChartComponent = ({
   return <Line data={chartData} options={options} className="m-4" />;
 };
 
-export const CombinedChart = ({ data }: ChartComponentProps) => {
+export const CombinedChart = ({ data, title }: ChartComponentProps) => {
   // Prepare the chart data
   const chartData = {
     labels: data.map((entry) => entry.date), // X-axis labels (dates)
@@ -142,7 +142,7 @@ export const CombinedChart = ({ data }: ChartComponentProps) => {
       },
       title: {
         display: true,
-        text: 'COVID-19 Hospitalization and Cases Over Time',
+        text: title,
       },
     },
     scales: {

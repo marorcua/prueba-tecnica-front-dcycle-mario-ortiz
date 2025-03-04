@@ -1,54 +1,19 @@
-import { useEffect, useMemo, useState } from 'react';
-import { fetchCovidData } from '../services/fetchCovidData';
 import { ChartComponent, CombinedChart } from '../components/ChartComponent';
 import { Toast } from '../components/Toast';
-import { CovidData } from '../types';
 import DateSelector from '../components/DateSelector';
+import useFetchCovidData from '../hooks/useFetchCovidData';
 
 function CovidDashboard() {
-  const [covidData, setCovidData] = useState<CovidData[]>([]);
-  const [startDate, setStartDate] = useState<string>('');
-  const [endDate, setEndDate] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const abort = new AbortController();
-        const response = await fetchCovidData();
-        setCovidData(response.data);
-        return () => {
-          abort.abort();
-        };
-      } catch (error) {
-        console.log(error);
-        setError('Could not retrieve data from server');
-      }
-    }
-    fetchData();
-  }, []);
-  const { maxDate, minDate } = useMemo(() => {
-    const orderedData = covidData.toSorted(
-      (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
-    );
-    return {
-      maxDate: orderedData[0]?.date + '',
-      minDate: orderedData.pop()?.date + '',
-    };
-  }, [covidData]);
-
-  const filteredData = useMemo(
-    () =>
-      covidData
-        .filter(
-          (info) =>
-            new Date(info.date) <= new Date(endDate || maxDate) &&
-            new Date(info.date) >= new Date(startDate || minDate)
-        )
-        .toSorted(
-          (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
-        ),
-    [covidData, endDate, startDate, maxDate, minDate]
-  );
+  const {
+    data: filteredData,
+    minDate,
+    maxDate,
+    endDate,
+    error,
+    setEndDate,
+    setStartDate,
+    startDate,
+  } = useFetchCovidData();
 
   return (
     <div className="w-[-webkit-fill-available] rounded-2xl bg-gray-100 p-8">

@@ -26,7 +26,7 @@ export const UserInfoDisplay = ({ userInfo }: { userInfo: UserInfo }) => {
                 <img
                   src={`https://flagsapi.com/${country.country_id}/flat/32.png`}
                   alt={country.country_id}
-                  className="mr-2 inline-block h-5 w-8"
+                  className="mr-2 inline-block w-8"
                 />
                 {country.country_id} ({(country.probability * 100).toFixed(2)}
                 %)

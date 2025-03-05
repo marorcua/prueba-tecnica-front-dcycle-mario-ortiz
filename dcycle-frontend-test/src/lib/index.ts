@@ -1,3 +1,4 @@
+import { Data } from '../components/ChartTest';
 import { UserInfo } from '../types';
 
 export const handleErrorMessage = (response: UserInfo) => {
@@ -37,10 +38,12 @@ export const convertToChartData = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   arr: { [x: string]: (Record<string, any> | undefined)[] }[],
   yAxis: number
-) => {
-  return arr?.map((e) => ({
-    label: Object.keys(e)[0],
-    data: Object.values(e)[0],
-    yAxisID: `y${yAxis}`,
-  }));
+): Data[] => {
+  return arr?.map(
+    (e): Data => ({
+      label: Object.keys(e)[0],
+      data: Object.values(e)[0],
+      yAxisID: `y${yAxis}`,
+    })
+  );
 };

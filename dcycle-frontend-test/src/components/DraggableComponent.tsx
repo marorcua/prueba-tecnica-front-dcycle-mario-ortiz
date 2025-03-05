@@ -2,10 +2,10 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { byString, convertToChartData, normalizeCamelCase } from '../lib';
 import { Data } from './ChartTest';
 import { CovidData } from '../types';
+import DragButton from './DragButton';
 
 const metrics: Record<string, string> = {
   dailyCases: 'cases.total.calculated.change_from_prior_day',
-  casesSevenDayAvg: 'cases.total.calculated.seven_day_average',
   accumulatedCases: 'cases.total.value',
   dailyDeaths: 'outcomes.death.total.calculated.change_from_prior_day',
   deathsSevenDayAvg: 'outcomes.death.total.calculated.seven_day_average',
@@ -40,8 +40,6 @@ function DraggableComponent({
   const [axis1Metrics, setAxis1Metrics] = useState<string[]>([]);
   const [axis2Metrics, setAxis2Metrics] = useState<string[]>([]);
   const handleDrop = (metric: string, axis: number) => {
-    console.log({ metric, axis });
-
     if (axis === 1) {
       setAxis1Metrics((prev) => [...new Set([...prev, metric])]);
       setAxis2Metrics((prev) => prev.filter((m) => m !== metric));
@@ -76,13 +74,13 @@ function DraggableComponent({
             key={metric}
             draggable
             onDragStart={(e) => e.dataTransfer.setData('metric', metric)}
-            className={`px-4 py-2 text-sm ${'bg-gray-200'}`}
+            className={`cursor-grab rounded-2xl px-4 py-2 text-sm ${'bg-gray-200'}`}
           >
             {normalizeCamelCase(metric)}
           </button>
         ))}
       </div>
-      <div className="mb-4 flex justify-between gap-4">
+      <div className="mb-4 flex justify-between gap-4 rounded-lg">
         <div
           className="min-h-[50px] w-1/2 rounded-md border bg-gray-100 p-4"
           onDragOver={(e) => e.preventDefault()}
@@ -90,27 +88,29 @@ function DraggableComponent({
         >
           <h3 className="font-bold">Axis 1</h3>
           {axis1Metrics.map((metric) => (
-            <p
+            <DragButton
               key={metric}
-              className={`m-4 inline-block bg-gray-200 px-4 py-2 text-sm`}
-            >
-              {normalizeCamelCase(metric)}
-            </p>
+              title={metric}
+              action={() =>
+                setAxis1Metrics((prev) => prev.filter((m) => m !== metric))
+              }
+            />
           ))}
         </div>
         <div
-          className="min-h-[50px] w-1/2 rounded-md border bg-gray-100 p-4"
+          className="min-h-[50px] w-1/2 rounded-lg rounded-md border bg-gray-100 p-4"
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => handleDrop(e.dataTransfer.getData('metric'), 2)}
         >
           <h3 className="font-bold">Axis 2</h3>
           {axis2Metrics.map((metric) => (
-            <p
+            <DragButton
               key={metric}
-              className={`m-4 inline-block bg-gray-200 px-4 py-2 text-sm`}
-            >
-              {normalizeCamelCase(metric)}
-            </p>
+              title={metric}
+              action={() =>
+                setAxis2Metrics((prev) => prev.filter((m) => m !== metric))
+              }
+            />
           ))}
         </div>
       </div>

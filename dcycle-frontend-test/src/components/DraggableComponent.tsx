@@ -5,17 +5,25 @@ import { CovidData } from '../types';
 
 const metrics: Record<string, string> = {
   dailyCases: 'cases.total.calculated.change_from_prior_day',
+  casesSevenDayAvg: 'cases.total.calculated.seven_day_average',
   accumulatedCases: 'cases.total.value',
   dailyDeaths: 'outcomes.death.total.calculated.change_from_prior_day',
+  deathsSevenDayAvg: 'outcomes.death.total.calculated.seven_day_average',
   accumulatedDeaths: 'outcomes.death.total.value',
   dailyHospitalized:
-    'outcomes.hospitalized.currently.total.calculated.change_from_prior_day',
-  accumulatedHospitalized: 'outcomes.hospitalized.currently.total.value',
+    'outcomes.hospitalized.currently.calculated.change_from_prior_day',
+  hospitalizedSevenDayAvg:
+    'outcomes.hospitalized.currently.calculated.seven_day_average',
+  accumulatedHospitalized: 'outcomes.hospitalized.in_icu.currently.total.value',
   dailyHospitalizedInIcu:
     'outcomes.hospitalized.in_icu.currently.calculated.change_from_prior_day',
+  inIcuSevenDayAvg:
+    'outcomes.hospitalized.in_icu.currently.calculated.seven_day_average',
   accumulatedHospitalizedInIcu: 'outcomes.hospitalized.in_icu.currently.value',
   dailyHospitalizedOnVentilatior:
     'outcomes.hospitalized.on_ventilator.currently.calculated.change_from_prior_day',
+  onVentilatiorSevenDayAvg:
+    'outcomes.hospitalized.on_ventilator.currently.calculated.seven_day_average',
   accumulatedHospitalizedOnVentilatior:
     'outcomes.hospitalized.on_ventilator.currently.value',
   dailyTesting: 'testing.total.calculated.change_from_prior_day',

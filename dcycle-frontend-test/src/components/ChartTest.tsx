@@ -1,5 +1,5 @@
 import { Line } from 'react-chartjs-2';
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables, scales } from 'chart.js';
 import ChartSkeleton from './ChartSkeleton';
 
 Chart.register(...registerables);
@@ -25,8 +25,8 @@ const ZoomableChart = ({
     plugins: {
       zoom: {
         pan: {
-          enabled: true,
-          mode: 'x',
+          // enabled: true,
+          // mode: 'x',
         },
         zoom: {
           wheel: {
@@ -39,11 +39,28 @@ const ZoomableChart = ({
         },
       },
     },
+    scales: {
+      x: {
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+      y1: {
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+      y2: {
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+    },
   };
 
   return (
-    <div className="mx-auto w-full max-w-4xl rounded-lg bg-white p-4 shadow-lg">
-      <h2 className="mb-4 text-center text-xl font-bold">Gráfica Zoomable</h2>
+    <div className="">
+      <h2 className="mb-4 text-center text-xl font-bold">Gráfica Dinámica</h2>
       {chartData?.datasets?.length > 0 ? (
         <Line data={chartData} options={options} />
       ) : (

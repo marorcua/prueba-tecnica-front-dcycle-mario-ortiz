@@ -7,7 +7,7 @@ export type Data = {
   label: string;
   data: (Record<string, any> | undefined)[];
   yAxisID: string;
-}[];
+};
 
 const ZoomableChart = ({
   labels,

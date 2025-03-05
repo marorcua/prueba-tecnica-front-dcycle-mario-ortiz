@@ -9,8 +9,15 @@ const metrics: Record<string, string> = {
   dailyDeaths: 'outcomes.death.total.calculated.change_from_prior_day',
   accumulatedDeaths: 'outcomes.death.total.value',
   dailyHospitalized:
-    'outcomes.hospitalized.total.calculated.change_from_prior_day',
-  accumulatedHospitalized: 'cases.hospitalized.total.value',
+    'outcomes.hospitalized.currently.total.calculated.change_from_prior_day',
+  accumulatedHospitalized: 'outcomes.hospitalized.currently.total.value',
+  dailyHospitalizedInIcu:
+    'outcomes.hospitalized.in_icu.currently.calculated.change_from_prior_day',
+  accumulatedHospitalizedInIcu: 'outcomes.hospitalized.in_icu.currently.value',
+  dailyHospitalizedOnVentilatior:
+    'outcomes.hospitalized.on_ventilator.currently.calculated.change_from_prior_day',
+  accumulatedHospitalizedOnVentilatior:
+    'outcomes.hospitalized.on_ventilator.currently.value',
   dailyTesting: 'testing.total.calculated.change_from_prior_day',
   accumulatedTesting: 'testing.total.value',
 };

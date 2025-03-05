@@ -39,11 +39,9 @@ export const convertToChartData = (
   arr: { [x: string]: (Record<string, any> | undefined)[] }[],
   yAxis: number
 ): Data[] => {
-  return arr?.map(
-    (e): Data => ({
-      label: Object.keys(e)[0],
-      data: Object.values(e)[0],
-      yAxisID: `y${yAxis}`,
-    })
-  );
+  return arr?.map((e) => ({
+    label: Object.keys(e)[0],
+    data: Object.values(e)[0],
+    yAxisID: `y${yAxis}`,
+  }));
 };

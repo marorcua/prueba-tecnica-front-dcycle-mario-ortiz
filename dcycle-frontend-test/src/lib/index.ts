@@ -17,6 +17,7 @@ export const normalizeCamelCase = (str: string) =>
       return str.toUpperCase();
     });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const byString = function (o: Record<string, any>, s: string) {
   s = s.replace(/\[(\w+)\]/g, '.$1');
   s = s.replace(/^\./, '');
@@ -30,4 +31,16 @@ export const byString = function (o: Record<string, any>, s: string) {
     }
   }
   return o;
+};
+
+export const convertToChartData = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  arr: { [x: string]: (Record<string, any> | undefined)[] }[],
+  yAxis: number
+) => {
+  return arr?.map((e) => ({
+    label: Object.keys(e)[0],
+    data: Object.values(e)[0],
+    yAxisID: `y${yAxis}`,
+  }));
 };

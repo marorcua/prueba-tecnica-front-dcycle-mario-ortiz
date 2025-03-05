@@ -1,16 +1,19 @@
-import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
+export type Data = {
+  label: string;
+  data: (Record<string, any> | undefined)[];
+  yAxisID: string;
+}[];
 
-const ZoomableChart = ({ labels, data }: { labels: string[] }) => {
+const ZoomableChart = ({ labels, data }: { labels: string[]; data: Data }) => {
+  console.log({ data });
+
   const chartData = {
     labels,
-    datasets: data?.map((e) => ({
-      label: Object.keys(e)[0],
-      data: Object.values(e)[0],
-    })),
+    datasets: data,
   };
   const options = {
     responsive: true,

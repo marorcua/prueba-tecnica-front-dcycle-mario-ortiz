@@ -2,7 +2,7 @@ import { ChartComponent, CombinedChart } from '../components/ChartComponent';
 import { Toast } from '../components/Toast';
 import DateSelector from '../components/DateSelector';
 import useFetchCovidData from '../hooks/useFetchCovidData';
-import ZoomableChart, { Data } from '../components/ChartTest';
+import ZoomableChart, { Data } from '../components/ChartZoomable';
 import { useState } from 'react';
 import DraggableComponent from '../components/DraggableComponent';
 

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { byString, convertToChartData, normalizeCamelCase } from '../lib';
-import { Data } from './ChartTest';
+import { Data } from './ChartZoomable';
 import { CovidData } from '../types';
 import DragButton from './DragButton';
 

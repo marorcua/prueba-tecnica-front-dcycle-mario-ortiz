@@ -1,8 +1,9 @@
 import { Line } from 'react-chartjs-2';
-import { Chart, registerables, scales } from 'chart.js';
+import { Chart, ChartOptions, registerables, scales } from 'chart.js';
 import ChartSkeleton from './ChartSkeleton';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
-Chart.register(...registerables);
+Chart.register(...registerables, zoomPlugin);
 export type Data = {
   label: string;
   data: (Record<string, any> | undefined)[];
@@ -20,15 +21,18 @@ const ZoomableChart = ({
     labels,
     datasets: data,
   };
-  const options = {
+  const options: ChartOptions<'line'> = {
     responsive: true,
     plugins: {
       zoom: {
         pan: {
-          // enabled: true,
-          // mode: 'x',
+          enabled: true,
+          mode: 'x',
         },
         zoom: {
+          drag: {
+            enabled: true,
+          },
           wheel: {
             enabled: true,
           },

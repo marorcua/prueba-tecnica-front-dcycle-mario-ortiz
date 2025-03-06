@@ -1,4 +1,4 @@
-import { Data } from '../components/ChartTest';
+import { Data } from '../components/ChartZoomable';
 import { UserInfo } from '../types';
 
 export const handleErrorMessage = (response: UserInfo) => {
